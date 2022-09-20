@@ -5,7 +5,7 @@ final class StudyPlanViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet private(set) weak var textFieldCourse: UITextField!
     @IBOutlet private(set) weak var textFieldSection: UITextField!
-    @IBOutlet private(set) weak var dpDate: UIDatePicker!
+    @IBOutlet private(set) weak var datePickerDate: UIDatePicker!
     
     // MARK: - Properties
     private let studyManager = StudyManager.shared
@@ -13,6 +13,8 @@ final class StudyPlanViewController: UIViewController {
     // MARK: - Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        datePickerDate.minimumDate = Date()
     }
 
     // MARK: - IBActions
@@ -20,9 +22,26 @@ final class StudyPlanViewController: UIViewController {
 		let id = UUID().uuidString
         let studyPlan = StudyPlan(course: textFieldCourse.text!,
 								  section: textFieldSection.text!,
-								  date: dpDate.date,
+								  date: datePickerDate.date,
 								  done: false,
 								  id: id)
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Lembrete"
+        content.subtitle = "Matéria: \(studyPlan.course)"
+        content.body = "Estudar \(studyPlan.section)"
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "ring.caf"))
+        content.categoryIdentifier = NotificationIdentifiers.category
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+        
         studyManager.addPlan(studyPlan)
         navigationController!.popViewController(animated: true)
     }

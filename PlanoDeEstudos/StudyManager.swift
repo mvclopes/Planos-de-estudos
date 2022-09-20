@@ -1,5 +1,6 @@
 import Foundation
 
+// Classes 'final' não permite que outras classes herdem dela
 final class StudyManager {
     
     // MARK: - Properties
