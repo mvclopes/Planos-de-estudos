@@ -33,7 +33,12 @@ final class StudyPlanViewController: UIViewController {
         content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "ring.caf"))
         content.categoryIdentifier = NotificationIdentifiers.category
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let dateComponent = Calendar.current.dateComponents(
+            [.year, .month, .day, .hour, .minute],
+            from: datePickerDate.date
+        )
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
         
         let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request) { error in

@@ -13,10 +13,26 @@ final class StudyPlansTableViewController: UITableViewController {
     // MARK: - Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onConfirmed),
+            name: NSNotification.Name(rawValue: NotificationIdentifiers.confirmed),
+            object: nil
+        )
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
+    // MARK: - Methods
+    @objc private func onConfirmed(notification: Notification) {
+        if let id = notification.userInfo?["id"] as? String {
+            print("ID recuperado: ", id)
+            StudyManager.shared.setPlanDone(id: id)
+        }
         tableView.reloadData()
     }
     

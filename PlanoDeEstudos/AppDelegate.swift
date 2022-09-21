@@ -4,6 +4,7 @@ struct NotificationIdentifiers {
     static let confirm = "Confirm"
     static let cancel = "Cancel"
     static let category = "Lembrete"
+    static let confirmed = "Confirmed"
 }
 
 @UIApplicationMain
@@ -50,7 +51,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+                    
+        switch response.actionIdentifier {
+        case NotificationIdentifiers.confirm:
+            print("Usuário apertou botão de confirmar")
+            let id = response.notification.request.identifier
+            
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: NotificationIdentifiers.confirmed),
+                object: nil,
+                userInfo: ["id":id]
+            )
+            
+            
+        case NotificationIdentifiers.cancel:
+            print("Usuário apertou botão de cancelar")
+        case UNNotificationDefaultActionIdentifier:
+            print("Usuário apertou na notificação")
+        case UNNotificationDismissActionIdentifier:
+            print("Usuário deu dismiss na notificação")
+        default:
+            print("Outra ação na notificação")
+        }
+        
+        completionHandler()
         
     }
     

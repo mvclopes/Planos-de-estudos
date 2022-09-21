@@ -1,4 +1,5 @@
 import Foundation
+import UserNotifications
 
 // Classes 'final' não permite que outras classes herdem dela
 final class StudyManager {
@@ -38,6 +39,8 @@ final class StudyManager {
     }
     
     func removePlan(at index: Int) {
+        let id = studyPlans[index].id
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
         studyPlans.remove(at: index)
         savePlans()
     }
