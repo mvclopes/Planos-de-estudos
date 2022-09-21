@@ -46,7 +46,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         center.setNotificationCategories([category])
         
+        application.registerForRemoteNotifications()
+        
         return true
+    }
+    
+    func application(_ application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
+        print("Errou ao tentar se registrar ao serviço de push notification")
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("O app foi registrado para receber push notifications")
+        let token = deviceToken.reduce("") { $0 + String(format: "%02x", $1) }
+        print("Aqui está o seu token: ", token)
     }
 }
 

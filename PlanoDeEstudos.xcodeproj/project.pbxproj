@@ -30,6 +30,7 @@
 		A12AC61D1F9D18D5006EEC7B /* StudyPlansTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPlansTableViewController.swift; sourceTree = "<group>"; };
 		A12AC61F1F9D1A43006EEC7B /* StudyPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPlan.swift; sourceTree = "<group>"; };
 		A12AC6211F9D1B87006EEC7B /* StudyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyManager.swift; sourceTree = "<group>"; };
+		AC8F221228DA98C6001C5CA1 /* PlanoDeEstudos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlanoDeEstudos.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +63,7 @@
 		A12AC6081F9D1487006EEC7B /* PlanoDeEstudos */ = {
 			isa = PBXGroup;
 			children = (
+				AC8F221228DA98C6001C5CA1 /* PlanoDeEstudos.entitlements */,
 				A12AC6091F9D1487006EEC7B /* AppDelegate.swift */,
 				A12AC61F1F9D1A43006EEC7B /* StudyPlan.swift */,
 				A12AC60D1F9D1487006EEC7B /* Main.storyboard */,
@@ -295,6 +297,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PlanoDeEstudos/PlanoDeEstudos.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PlanoDeEstudos/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -310,6 +313,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PlanoDeEstudos/PlanoDeEstudos.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PlanoDeEstudos/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
